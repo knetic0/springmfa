@@ -12,7 +12,6 @@ import com.mehmetsolak.springmfa.presentation.api.dtos.request.RegisterRequest;
 import com.mehmetsolak.springmfa.presentation.api.dtos.request.VerifyMfaRequest;
 import com.mehmetsolak.springmfa.presentation.api.dtos.response.LoginResponse;
 import com.mehmetsolak.springmfa.presentation.api.dtos.response.RegisterResponse;
-import com.mehmetsolak.springmfa.presentation.security.Authenticated;
 import com.mehmetsolak.springmfa.presentation.security.SessionAuthenticator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -74,7 +73,6 @@ public class AuthController {
     }
 
     @PostMapping("/login/mfa")
-    @Authenticated
     public ResponseEntity<Void> verifyMfa(
             @RequestBody VerifyMfaRequest request,
             HttpServletRequest httpRequest,
