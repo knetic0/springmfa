@@ -1,6 +1,7 @@
 package com.mehmetsolak.springmfa.application.features.setupMfa;
 
 import com.mehmetsolak.springmfa.application.core.CommandHandler;
+import com.mehmetsolak.springmfa.application.exceptions.UserNotFoundException;
 import com.mehmetsolak.springmfa.application.ports.TotpPort;
 import com.mehmetsolak.springmfa.domain.User;
 import com.mehmetsolak.springmfa.domain.UserRepository;
@@ -20,7 +21,7 @@ public class SetupMfaCommandHandler implements CommandHandler<SetupMfaCommand, S
     @Override
     public SetupMfaCommandResponse execute(SetupMfaCommand command) {
         User user = userRepository.findById(command.userId())
-                .orElseThrow();
+                .orElseThrow(UserNotFoundException::new);
 
         String secret = totpPort.generateSecret();
         user.startMfaSetup(secret);
