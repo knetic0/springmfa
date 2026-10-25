@@ -6,6 +6,7 @@ import com.mehmetsolak.springmfa.application.ports.TotpPort;
 import com.mehmetsolak.springmfa.domain.User;
 import com.mehmetsolak.springmfa.domain.UserRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class EnableMfaCommandHandler implements CommandHandler<EnableMfaCommand, EnableMfaCommandResponse> {
@@ -19,6 +20,7 @@ public class EnableMfaCommandHandler implements CommandHandler<EnableMfaCommand,
     }
 
     @Override
+    @Transactional
     public EnableMfaCommandResponse execute(EnableMfaCommand command) {
         User user = userRepository.findById(command.userId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));

@@ -7,6 +7,7 @@ import com.mehmetsolak.springmfa.domain.PasswordHash;
 import com.mehmetsolak.springmfa.domain.User;
 import com.mehmetsolak.springmfa.domain.UserRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class RegisterCommandHandler implements CommandHandler<RegisterCommand, RegisterCommandResponse> {
@@ -19,6 +20,8 @@ public class RegisterCommandHandler implements CommandHandler<RegisterCommand, R
         this.passwordHasherPort = passwordHasherPort;
     }
 
+    @Override
+    @Transactional
     public RegisterCommandResponse execute(RegisterCommand command) {
         Email email = Email.of(command.email());
 
