@@ -46,9 +46,6 @@ public class JpaUserEntity {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Version
-    private Long version;
-
     protected JpaUserEntity() {}
 
     public JpaUserEntity(UUID id, String email, String passwordHash, Role role,
@@ -69,7 +66,6 @@ public class JpaUserEntity {
     public boolean isActive() { return active; }
     public boolean isMfaEnabled() { return mfaEnabled; }
     public String getMfaSecret() { return mfaSecret; }
-    public Long getVersion() { return version; }
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
 
